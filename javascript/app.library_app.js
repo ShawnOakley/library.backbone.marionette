@@ -16,6 +16,8 @@ MyApp.LibraryApp = function(){
 		 
 		initialize: function(){
 		var self = this;
+		_.bindAll(this, 'search');
+		MyApp.vent.on('search:term', function(term){ self.search(term); });
 		 
 		// the number of books we fetch each time
 		this.maxResults = 40;
@@ -102,7 +104,7 @@ MyApp.LibraryApp = function(){
 
 	// for testing purposes
 	MyApp.addInitializer(function(){
-		LibraryApp.Books.search('Neuromarketing');
+		MyApp.vent.trigger('search:term', 'Neuromarketing');
 	});
 
 	return LibraryApp;
